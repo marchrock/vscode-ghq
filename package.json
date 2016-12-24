@@ -11,7 +11,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.ghqMove"
+    "onCommand:extension.ghqMove",
+    "onCommand:extension.ghqGet"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -19,6 +20,11 @@
       {
         "command": "extension.ghqMove",
         "title": "Move to repository",
+        "category": "GHQ"
+      },
+      {
+        "command": "extension.ghqGet",
+        "title": "Get repository",
         "category": "GHQ"
       }
     ]
@@ -37,6 +43,7 @@
     "@types/mocha": "^2.2.32"
   },
   "dependencies": {
-    "shelljs": "^0.7.5"
+    "shelljs": "^0.7.5",
+    "strip-ansi": "^3.0.1"
   }
 }
