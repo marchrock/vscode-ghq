@@ -16,8 +16,9 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {
 }
 
+let isGhqAvailable = sh.which('ghq');
+
 function ghqMove() {
-    let isGhqAvailable = sh.which('ghq');
     if (!isGhqAvailable) {
         vscode.window.showWarningMessage('ghq is not installed.');
         return;
