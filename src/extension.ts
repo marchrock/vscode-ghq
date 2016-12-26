@@ -11,8 +11,9 @@ export function activate(context: vscode.ExtensionContext) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "vscode-ghq" is now active!');
 
-    context.subscriptions.push(vscode.commands.registerCommand('extension.ghqMove', ghqMove));
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqGet', ghqGet));
+    context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpen', ghqOpen));
+    context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpenInNewWindow', ghqOpenInNewWindow));
 }
 
 export function deactivate() {
@@ -20,7 +21,15 @@ export function deactivate() {
 
 let isGhqAvailable = sh.which('ghq');
 
-function ghqMove() {
+function ghqOpen(){
+    ghqListRepositoryAndOpen(false);
+}
+
+function ghqOpenInNewWindow(){
+    ghqListRepositoryAndOpen(true);
+}
+
+function ghqListRepositoryAndOpen(isNewWindow: Boolean) {
     if (!isGhqAvailable) {
         vscode.window.showWarningMessage('ghq is not installed.');
         return;
@@ -41,7 +50,7 @@ function ghqMove() {
                 } else {
                     let uri = vscode.Uri.parse('file://' + ghqRoot + '/' + selectedRepository);
                     if (fs.existsSync(uri.fsPath)){
-                        let success = vscode.commands.executeCommand('vscode.openFolder', uri);
+                        let success = vscode.commands.executeCommand('vscode.openFolder', uri, isNewWindow);
                     }
                 }
             },

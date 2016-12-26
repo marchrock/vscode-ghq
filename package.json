@@ -15,15 +15,21 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.ghqMove",
+    "onCommand:extension.ghqOpen",
+    "onCommand:extension.ghqOpenInNewWindow",
     "onCommand:extension.ghqGet"
   ],
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "extension.ghqMove",
-        "title": "Move to repository",
+        "command": "extension.ghqOpen",
+        "title": "Open Repository",
+        "category": "GHQ"
+      },
+      {
+        "command": "extension.ghqOpenInNewWindow",
+        "title": "Open Repository in New Window",
         "category": "GHQ"
       },
       {
