@@ -15,7 +15,7 @@
     }
   ],
   "engines": {
-    "vscode": "^1.5.0"
+    "vscode": "^1.24.0"
   },
   "categories": [
     "Other"
@@ -46,20 +46,21 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
     "typescript": "^2.0.3",
-    "vscode": "^1.0.0",
-    "mocha": "^2.3.3",
-    "@types/node": "^6.0.40",
-    "@types/mocha": "^2.2.32"
+    "vscode": "^1.1",
+    "mocha": "^5.2",
+    "@types/node": "^10.5",
+    "@types/mocha": "^5.2"
   },
   "dependencies": {
-    "shelljs": "^0.7.5",
-    "strip-ansi": "^3.0.1"
+    "shelljs": "^0.8",
+    "strip-ansi": "^4.0"
   }
 }
