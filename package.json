@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "shelljs": "^0.8",
-    "strip-ansi": "^4.0"
+    "strip-ansi": "^4.0",
+    "util.promisify": "^1.0.0"
   }
 }
