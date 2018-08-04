@@ -23,6 +23,7 @@
   "activationEvents": [
     "onCommand:extension.ghqOpen",
     "onCommand:extension.ghqOpenInNewWindow",
+    "onCommand:extension.ghqAddToWorkSpace",
     "onCommand:extension.ghqGet"
   ],
   "main": "./out/src/extension",
@@ -39,8 +40,13 @@
         "category": "GHQ"
       },
       {
+        "command": "extension.ghqAddToWorkSpace",
+        "title": "Add Repository to Current Workspace",
+        "category": "GHQ"
+      },
+      {
         "command": "extension.ghqGet",
-        "title": "Get repository",
+        "title": "Get Repository",
         "category": "GHQ"
       }
     ]

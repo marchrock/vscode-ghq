@@ -15,6 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqGet', ghqGet));
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpen', ghqOpen));
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpenInNewWindow', ghqOpenInNewWindow));
+    context.subscriptions.push(vscode.commands.registerCommand('extension.ghqAddToWorkSpace', ghqAddToWorkSpace));
 }
 
 export function deactivate() {
@@ -30,6 +31,12 @@ async function ghqOpen(){
 async function ghqOpenInNewWindow(){
     const uri = await ghqListRepositoryAndPick();
     if(uri) vscode.commands.executeCommand('vscode.openFolder', uri, true);
+}
+
+async function ghqAddToWorkSpace(){
+    const uri = await ghqListRepositoryAndPick();
+    const position = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders.length : 0;
+    if(uri) vscode.workspace.updateWorkspaceFolders(position, null, { uri });
 }
 
 async function ghqListRepositoryAndPick() {
