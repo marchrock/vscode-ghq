@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as childProcess from 'child_process';
 import * as sh from 'shelljs';
 import * as stripAnsi from 'strip-ansi';
+import * as promisify from 'util.promisify';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -14,6 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqGet', ghqGet));
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpen', ghqOpen));
     context.subscriptions.push(vscode.commands.registerCommand('extension.ghqOpenInNewWindow', ghqOpenInNewWindow));
+    context.subscriptions.push(vscode.commands.registerCommand('extension.ghqAddToWorkSpace', ghqAddToWorkSpace));
 }
 
 export function deactivate() {
@@ -21,43 +23,40 @@ export function deactivate() {
 
 let isGhqAvailable = sh.which('ghq');
 
-function ghqOpen(){
-    ghqListRepositoryAndOpen(false);
+async function ghqOpen(){
+    const uri = await ghqListRepositoryAndPick();
+    if(uri) vscode.commands.executeCommand('vscode.openFolder', uri);
 }
 
-function ghqOpenInNewWindow(){
-    ghqListRepositoryAndOpen(true);
+async function ghqOpenInNewWindow(){
+    const uri = await ghqListRepositoryAndPick();
+    if(uri) vscode.commands.executeCommand('vscode.openFolder', uri, true);
 }
 
-function ghqListRepositoryAndOpen(isNewWindow: Boolean) {
+async function ghqAddToWorkSpace(){
+    const uri = await ghqListRepositoryAndPick();
+    const position = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders.length : 0;
+    if(uri) vscode.workspace.updateWorkspaceFolders(position, null, { uri });
+}
+
+async function ghqListRepositoryAndPick() {
     if (!isGhqAvailable) {
         vscode.window.showWarningMessage('ghq is not installed.');
         return;
     }
 
-    let ghqRoot = childProcess.execSync('ghq root').toString().trim();
+    const ghqRoot = childProcess.execSync('ghq root').toString().trim();
 
-    childProcess.exec('ghq list', (err, stdout, stderr) => {
-        if (err) {
-            vscode.window.showInformationMessage(err.name + ': ' + err.message);
-        }
-
-        let ghqReposList = stdout.split("\n");
-        vscode.window.showQuickPick(ghqReposList).then(
-            function(selectedRepository) {
-                if (selectedRepository === undefined || selectedRepository === "") {
-                    return;
-                } else {
-                    let uri = vscode.Uri.parse('file://' + ghqRoot + '/' + selectedRepository);
-                    if (fs.existsSync(uri.fsPath)){
-                        let success = vscode.commands.executeCommand('vscode.openFolder', uri, isNewWindow);
-                    }
-                }
-            },
-            function(reason) {
-                vscode.window.showWarningMessage(reason.toString())
-            });
+    const stdout = await promisify(childProcess.exec)('ghq list').catch(err => {
+        vscode.window.showInformationMessage(err.name + ': ' + err.message);
+        return '';
     });
+    const ghqReposList = stdout.split('\n');
+    const selectedRepository = await vscode.window.showQuickPick(ghqReposList);
+    if (selectedRepository === undefined || selectedRepository === '') return '';
+
+    const uri = vscode.Uri.parse('file://' + ghqRoot + '/' + selectedRepository);
+    if (fs.existsSync(uri.fsPath)) return uri;
 }
 
 function ghqGet() {
