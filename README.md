@@ -1,5 +1,6 @@
 # vscode-ghq
-### ghq interface for Visual Studio Code
+
+## ghq interface for Visual Studio Code
 
 Add ghq interface and move to repository under ghq management.
 
