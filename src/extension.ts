@@ -55,7 +55,7 @@ async function ghqListRepositoryAndPick() {
     const selectedRepository = await vscode.window.showQuickPick(ghqReposList);
     if (selectedRepository === undefined || selectedRepository === '') return '';
 
-    const uri = vscode.Uri.parse('file://' + ghqRoot + '/' + selectedRepository);
+    const uri = vscode.Uri.file(ghqRoot + '/' + selectedRepository);
     if (fs.existsSync(uri.fsPath)) return uri;
 }
 
