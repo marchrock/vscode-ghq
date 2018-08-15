@@ -39,6 +39,14 @@ async function ghqAddToWorkSpace(){
     if(uri) vscode.workspace.updateWorkspaceFolders(position, null, { uri });
 }
 
+async function ghqGetRepositoryList() {
+    const stdout = await promisify(childProcess.exec)('ghq list').catch(err => {
+        vscode.window.showInformationMessage(err.name + ': ' + err.message);
+        return '';
+    });
+    return stdout.split('\n').filter(elem => elem !== undefined && elem !== '');
+}
+
 async function ghqListRepositoryAndPick() {
     if (!isGhqAvailable) {
         vscode.window.showWarningMessage('ghq is not installed.');
@@ -46,12 +54,7 @@ async function ghqListRepositoryAndPick() {
     }
 
     const ghqRoot = childProcess.execSync('ghq root').toString().trim();
-
-    const stdout = await promisify(childProcess.exec)('ghq list').catch(err => {
-        vscode.window.showInformationMessage(err.name + ': ' + err.message);
-        return '';
-    });
-    const ghqReposList = stdout.split('\n');
+    const ghqReposList = await ghqGetRepositoryList();
     const selectedRepository = await vscode.window.showQuickPick(ghqReposList);
     if (selectedRepository === undefined || selectedRepository === '') return '';
 
