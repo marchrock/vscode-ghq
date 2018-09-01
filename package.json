@@ -24,6 +24,7 @@
     "onCommand:extension.ghqOpen",
     "onCommand:extension.ghqOpenInNewWindow",
     "onCommand:extension.ghqAddToWorkSpace",
+    "onCommand:extension.ghqOpenInBrowser",
     "onCommand:extension.ghqGet"
   ],
   "main": "./out/src/extension",
@@ -42,6 +43,11 @@
       {
         "command": "extension.ghqAddToWorkSpace",
         "title": "Add Repository to Current Workspace",
+        "category": "GHQ"
+      },
+      {
+        "command": "extension.ghqOpenInBrowser",
+        "title": "Open Repository Page in Default Browser",
         "category": "GHQ"
       },
       {
