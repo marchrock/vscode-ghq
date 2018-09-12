@@ -2,18 +2,13 @@
   "name": "vscode-ghq",
   "displayName": "vscode-ghq",
   "description": "ghq interface for Visual Studio Code",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "publisher": "marchrock",
   "repository": {
     "type": "git",
     "url": "https://github.com/marchrock/vscode-ghq"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/marchrock/vscode-ghq/blob/master/LICENSE.md"
-    }
-  ],
+  "license": "MIT",
   "engines": {
     "vscode": "^1.24.0"
   },
@@ -65,11 +60,11 @@
     "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^2.0.3",
-    "vscode": "^1.1",
+    "@types/mocha": "^5.2",
+    "@types/node": "^10.9.4",
     "mocha": "^5.2",
-    "@types/node": "^10.5",
-    "@types/mocha": "^5.2"
+    "typescript": "^3.0.3",
+    "vscode": "^1.1.21"
   },
   "dependencies": {
     "shelljs": "^0.8",

@@ -4,8 +4,13 @@ All notable changes to the "vscode-ghq" extension will be documented in this fil
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
+
+## [0.5.0] - 2018/09/12
 ### Added
 - `extension.ghqOpenInBrowser` : Open Repository in Default Browser
+
+### Fixed
+- Fix the way of getting stdout of child_process.exec
 
 ## [0.4.1] - 2018-08-16
 
