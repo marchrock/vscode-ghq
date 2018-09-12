@@ -48,7 +48,7 @@ async function ghqOpenInBrowser(){
 }
 
 async function ghqGetRepositoryList() {
-    const stdout = await promisify(childProcess.exec)('ghq list').catch(err => {
+    const { stdout } = await promisify(childProcess.exec)('ghq list').catch(err => {
         vscode.window.showInformationMessage(err.name + ': ' + err.message);
         return '';
     });
