@@ -5,6 +5,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.5.2] - 2018/11/27
+- Fixed mistake.
+
 ## [0.5.1] - 2018/11/27
 - Updated dependencies
 
