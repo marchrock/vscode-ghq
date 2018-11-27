@@ -5,6 +5,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.5.1] - 2018/11/27
+- Updated dependencies
+
 ## [0.5.0] - 2018/09/12
 ### Added
 - `extension.ghqOpenInBrowser` : Open Repository in Default Browser
