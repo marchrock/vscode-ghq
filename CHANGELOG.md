@@ -4,6 +4,9 @@ All notable changes to the "vscode-ghq" extension will be documented in this fil
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
+## [0.5.3] - 2019/07/16
+- Updated dependencies
+- Fixed module import
 
 ## [0.5.2] - 2018/11/27
 - Fixed mistake.
