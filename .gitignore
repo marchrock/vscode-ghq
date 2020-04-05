@@ -53,3 +53,5 @@ jspm_packages
 
 # Visual Studio Code Extension Output
 *.vsix
+
+.vscode-test

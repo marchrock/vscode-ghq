@@ -3,8 +3,8 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as childProcess from 'child_process';
 import * as sh from 'shelljs';
-import stripAnsi from 'strip-ansi';
 import * as promisify from 'util.promisify';
+import stripAnsi = require('strip-ansi');
 
 export function activate(context: vscode.ExtensionContext) {
 
