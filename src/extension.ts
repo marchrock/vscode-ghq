@@ -61,12 +61,13 @@ async function ghqListRepositoryAndPick() {
         return;
     }
 
-    const ghqRoot = childProcess.execSync('ghq root').toString().trim();
     const ghqReposList = await ghqGetRepositoryList();
     const selectedRepository = await vscode.window.showQuickPick(ghqReposList);
     if (selectedRepository === undefined || selectedRepository === '') return '';
 
-    const uri = vscode.Uri.file(ghqRoot + '/' + selectedRepository);
+    const commandOutput = childProcess.spawnSync('ghq', ['list', '--exact', '--full-path', selectedRepository]).stdout.toString();
+    const repositoryPath = commandOutput.split(/\r?\n/)[0];
+    const uri = vscode.Uri.file(repositoryPath);
     if (fs.existsSync(uri.fsPath)) return uri;
 }
 
