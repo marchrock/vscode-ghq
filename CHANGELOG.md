@@ -3,7 +3,10 @@ All notable changes to the "vscode-ghq" extension will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0.0] - 2020/08/18
+- Fixed a problem that repos located in non-primary ghq.root cannot be opened.
+- Updated dependencies
+
 ## [0.5.4] - 2020/04/05
 - Updated dependencies
 
